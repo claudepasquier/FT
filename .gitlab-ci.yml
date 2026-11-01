@@ -55,6 +55,7 @@ mirror-github:
     - echo "$GITHUB_MIRROR_KEY" > ~/.ssh/id_ed25519
     - chmod 600 ~/.ssh/id_ed25519
     - ssh-keyscan github.com >> ~/.ssh/known_hosts
+  allow_failure: true   # does not block the pipeline until variables are set
   script:
     - git clone --mirror "$CI_REPOSITORY_URL" repo.git
     - cd repo.git
