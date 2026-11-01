@@ -1,0 +1,41 @@
+# Deploy the FT web app to GitHub Pages.
+# Enabled automatically on the GitHub mirror (which is a push mirror of the
+# Koda GitLab repo). Requires no build: the WASM module is committed
+# (web/src/wasm/). On GitHub: Settings -> Pages -> Source: "GitHub Actions".
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble site
+        run: |
+          mkdir -p public/docs
+          cp -r web/index.html web/src public/
+          cp -r docs/* public/docs/
+          cp README.md LICENSE CITATION.cff AUTHORS.md public/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deployment
+        uses: actions/deploy-pages@v4
