@@ -204,6 +204,7 @@ function downloadCsv() {
 initPower2();
 initPresetButtons();
 renderWeights();
+markActivePreset();   // highlight the default preset (Aromatics)
 $('seq-input').addEventListener('input', updateSeqLength);
 $('btn-run').addEventListener('click', run);
 $('btn-csv').addEventListener('click', downloadCsv);
