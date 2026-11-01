@@ -24,16 +24,31 @@ function initPower2() {
     sel.value = '512';
 }
 
+function markActivePreset() {
+    // A preset button is "active" when the current selection matches its
+    // residue set with the preset weights. Custom edits deselect all.
+    for (const btn of document.querySelectorAll('#preset-buttons .preset')) {
+        const preset = PRESETS[btn.dataset.preset];
+        const matches =
+            preset.residues.length === selection.length &&
+            preset.residues.every((r) =>
+                selection.some((s) => s.residue === r.residue && s.weight === r.weight));
+        btn.classList.toggle('active', matches);
+    }
+}
+
 function initPresetButtons() {
     const box = $('preset-buttons');
     for (const key of PRESET_KEYS) {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'preset';
+        btn.dataset.preset = key;
         btn.textContent = PRESETS[key].label;
         btn.addEventListener('click', () => {
             selection = PRESETS[key].residues.map((r) => ({ ...r }));
             renderWeights();
+            markActivePreset();
         });
         box.appendChild(btn);
     }
@@ -53,6 +68,7 @@ function renderWeights() {
             const i = selection.findIndex((s) => s.residue === letter);
             if (i >= 0) { if (w === 0) selection.splice(i, 1); else selection[i].weight = w; }
             else if (w !== 0) selection.push({ residue: letter, weight: w });
+            markActivePreset();   // custom edit -> no preset highlighted
         });
         grid.appendChild(label);
     }
