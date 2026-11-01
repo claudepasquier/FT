@@ -66,7 +66,7 @@ export async function computePeriodicities(seq, selection, nfold,
         const peaks = [];
         for (let i = 0; i < count; i++) {
             const byteOff = outBuf + i * 32;
-            const intView = new Int32Array(mod.HEAP8.buffer, byteOff, 1);
+            const intView = new Int32Array(mod.HEAPF32.buffer, byteOff, 1);
             const fOff = byteOff / 4 + 1;
             const h = mod.HEAPF32;
             peaks.push({
