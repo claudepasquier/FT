@@ -35,17 +35,26 @@ pages:
 #   GITHUB_MIRROR_KEY : private SSH deploy key with write access
 mirror-github:
   stage: mirror
-  allow_failure: true   # does not block the pipeline until variables are set
-  before_script:
-    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
-    - echo "$GITHUB_MIRROR_KEY" > ~/.ssh/id_ed25519
-    - chmod 600 ~/.ssh/id_ed25519
-    - ssh-keyscan github.com >> ~/.ssh/known_hosts
+  allow_failure: true   # never blocks the pipeline
+  # Skip entirely unless both variables are configured. Note: CI runners may
+  # have restricted egress (github.com blocked); if this job cannot reach
+  # github.com, prefer Koda's built-in mirroring instead:
+  #   Settings > Repository > Mirroring repositories > Add push mirror
   script:
-    - git clone --mirror "$CI_REPOSITORY_URL" repo.git
-    - cd repo.git
-    - git remote add mirror "$GITHUB_MIRROR_URL"
-    - git push --mirror mirror
+    - |
+      if [ -z "$GITHUB_MIRROR_URL" ] || [ -z "$GITHUB_MIRROR_KEY" ]; then
+        echo "GITHUB_MIRROR_URL / GITHUB_MIRROR_KEY not set — skipping mirror."
+        exit 0
+      fi
+      mkdir -p ~/.ssh && chmod 700 ~/.ssh
+      echo "$GITHUB_MIRROR_KEY" > ~/.ssh/id_ed25519
+      chmod 600 ~/.ssh/id_ed25519
+      ssh-keyscan github.com >> ~/.ssh/known_hosts || {
+        echo "Cannot reach github.com from this runner (egress restricted)."; exit 0; }
+      git clone --mirror "$CI_REPOSITORY_URL" repo.git
+      cd repo.git
+      git remote add mirror "$GITHUB_MIRROR_URL"
+      git push --mirror mirror
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_COMMIT_TAG
