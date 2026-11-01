@@ -16,10 +16,10 @@ stages:
 image: bin.koda.cnrs.fr/docker-ci/podman/stable
 
 .build-native-script: &build-native-script
-  - podman run --rm -v "$PWD":/src -w /src gcc:13 make -C core refcli test
+  - podman run --rm -v "$PWD":/src -w /src docker.io/library/gcc:13 make -C core refcli test
 
 .build-wasm-script: &build-wasm-script
-  - podman run --rm -v "$PWD":/src -w /src emscripten/emsdk:3.1.68 make -C core wasm
+  - podman run --rm -v "$PWD":/src -w /src docker.io/emscripten/emsdk:3.1.68 make -C core wasm
 
 build-core-native:
   stage: build
