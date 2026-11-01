@@ -10,7 +10,7 @@ EMCC    ?= emcc
 CFLAGS  ?= -O2 -Wall -Wextra -std=c99
 EMFLAGS  = -O3 -flto -sMODULARIZE=1 -sEXPORT_ES6=1 \
            -sENVIRONMENT=web,worker -sALLOW_MEMORY_GROWTH=1 \
-           -sEXPORTED_FUNCTIONS=_fourt_compute,_fourt_version,_fourt_fft \
+           -sEXPORTED_FUNCTIONS=_fourt_compute,_fourt_version,_fourt_fft,_malloc,_free \
            -sEXPORTED_RUNTIME_METHODS=ccall,cwrap,HEAPF32 \
            --no-entry
 

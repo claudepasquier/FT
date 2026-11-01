@@ -34,6 +34,8 @@ jobs:
           cp -r docs/* public/docs/
           cp README.md LICENSE CITATION.cff AUTHORS.md public/
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true   # creates the Pages site if it does not exist yet
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public
