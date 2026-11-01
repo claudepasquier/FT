@@ -1,56 +1,27 @@
 # GitLab CI for FT modernization (Koda CNRS).
 #
-# Koda runners only allow images from bin.koda.cnrs.fr/docker-ci/*, so all
-# jobs run from the allowed `podman` image; the compiler jobs execute
-# gcc/emcc inside podman containers.
+# Koda runners only allow images from bin.koda.cnrs.fr/docker-ci/* and block
+# external registries (docker.io, mirror.gcr.io), so the toolchain cannot be
+# pulled in CI. The WASM module (web/src/wasm/fourt.js + fourt.wasm) is
+# therefore committed to the repository, built locally with:
+#     cd core && make wasm        (requires the Emscripten SDK)
 #
-# Note: if your Koda admin whitelists gcc:13 / emscripten/emsdk, you can
-# switch back to using them directly.
+# Only the allowed podman image is used, for the Pages deployment.
 
 stages:
-  - build
-  - test
   - pages
   - mirror
 
 image: bin.koda.cnrs.fr/docker-ci/podman/stable
 
-# docker.io is blocked from Koda runners; try registries reachable from
-# CNRS networks: mirror.gcr.io (Google's Docker Hub mirror), then quay.io
-# fallbacks. If your admin whitelists images, prefer bin.koda.cnrs.fr
-# internal mirrors.
-.build-native-script: &build-native-script
-  - podman run --rm -v "$PWD":/src -w /src mirror.gcr.io/library/gcc:13 make -C core refcli test
-
-.build-wasm-script: &build-wasm-script
-  - >
-    for IMG in mirror.gcr.io/emscripten/emsdk:3.1.68; do
-      echo "Trying $IMG";
-      if podman run --rm -v "$PWD":/src -w /src "$IMG" make -C core wasm; then exit 0; fi;
-    done; exit 1
-
-build-core-native:
-  stage: build
-  script: *build-native-script
-
-build-core-wasm:
-  stage: build
-  script: *build-wasm-script
-  artifacts:
-    paths:
-      - web/src/wasm/
-
 pages:
   stage: pages
-  needs:
-    - job: build-core-wasm
-      artifacts: true
   script:
     - mkdir -p public
     - cp -r web/index.html web/src public/
     - mkdir -p public/docs
     - cp -r docs/* public/docs/
-    - cp README.md LICENSE CITATION.cff public/
+    - cp README.md LICENSE CITATION.cff AUTHORS.md public/
   artifacts:
     paths:
       - public
