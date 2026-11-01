@@ -1,6 +1,11 @@
-# GitLab CI for FT modernization.
-# The front-end is build-free (plain ES modules); only the C core needs
-# building (native tests + Emscripten WASM).
+# GitLab CI for FT modernization (Koda CNRS).
+#
+# Koda runners only allow images from bin.koda.cnrs.fr/docker-ci/*, so all
+# jobs run from the allowed `podman` image; the compiler jobs execute
+# gcc/emcc inside podman containers.
+#
+# Note: if your Koda admin whitelists gcc:13 / emscripten/emsdk, you can
+# switch back to using them directly.
 
 stages:
   - build
@@ -8,24 +13,27 @@ stages:
   - pages
   - mirror
 
+image: bin.koda.cnrs.fr/docker-ci/podman/stable
+
+.build-native-script: &build-native-script
+  - podman run --rm -v "$PWD":/src -w /src gcc:13 make -C core refcli test
+
+.build-wasm-script: &build-wasm-script
+  - podman run --rm -v "$PWD":/src -w /src emscripten/emsdk:3.1.68 make -C core wasm
+
 build-core-native:
   stage: build
-  image: gcc:13
-  script:
-    - make -C core refcli test
+  script: *build-native-script
 
 build-core-wasm:
   stage: build
-  image: emscripten/emsdk:3.1.68
-  script:
-    - make -C core wasm
+  script: *build-wasm-script
   artifacts:
     paths:
       - web/src/wasm/
 
 pages:
   stage: pages
-  image: alpine:3.19
   needs:
     - job: build-core-wasm
       artifacts: true
@@ -48,14 +56,12 @@ pages:
 #   GITHUB_MIRROR_KEY : private SSH deploy key with write access
 mirror-github:
   stage: mirror
-  image: alpine:3.19
+  allow_failure: true   # does not block the pipeline until variables are set
   before_script:
-    - apk add --no-cache git openssh-client
     - mkdir -p ~/.ssh && chmod 700 ~/.ssh
     - echo "$GITHUB_MIRROR_KEY" > ~/.ssh/id_ed25519
     - chmod 600 ~/.ssh/id_ed25519
     - ssh-keyscan github.com >> ~/.ssh/known_hosts
-  allow_failure: true   # does not block the pipeline until variables are set
   script:
     - git clone --mirror "$CI_REPOSITORY_URL" repo.git
     - cd repo.git
