@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+  <HEAD>
+    <TITLE>Description of the Output</TITLE>
+  </HEAD>
+  <BODY BACKGROUND="bkg.gif">
+    <TABLE WIDTH='100%'>
+      <TR>
+        <TD ALIGN = 'LEFT'>
+          <I><BR>Identification of Residue Periodicities in Sequences</I>
+        </TD>
+        <TD ALIGN='RIGHT'>
+          <I>Varvayannis, N.J., Pasquier, C.M.,<BR>Promponas, V.I. and Hamodrakas S.J.</I>
+        </TD>
+      </TR>
+    </TABLE>
+    <HR>
+    <TABLE BORDER=0>
+      <TR>
+        <TD><A HREF="doc_index.html"><IMG BORDER=0 SRC="bt_cont.gif"></TD>
+        <TD>Index</TD><TD WIDTH=15></TD>
+        <TD><A HREF="doc_input.html"><IMG BORDER=0 SRC="bt_left.gif"></TD>
+        <TD>3. Description of the Input</TD><TD WIDTH=15></TD>
+        <TD><A HREF="doc_examples.html"><IMG BORDER=0 SRC="bt_right.gif"></TD>
+        <TD>5. Examples</TD>
+      </TR>
+    </TABLE>
+    <HR>
+
+    <H2>4. Description of the Output</H3>
+    <P>The output page summarize the input data used by the program and display
+      the result of the calculation.</P>
+
+    <H3>4.1 Summary of the query data</H3>
+    <P>After the title of the sequence (if one is specified in the input form),
+      a view of the selected residues in the sequence is displayed. If 1-letter
+      code is used, the sequence is printed with fourty residues per line. Each
+      selected residue is represented by its 1-letter code and non selected
+      residues are symbolised by a dot. For example, if the residues 'A' and
+      'L' are selected in the sequence:</P>
+    <PRE>
+  MSTESMIRDV ELAEEALPKK TGGPQGSRRC LFLSLFSFLI VAGATTLFCL LHFGVIGPQR
+  EEFPRDLSLI SPLAQAVRSS SRTPSDKPVA HVVANPQAEG QLQWLNRRAN ALLANGVELR
+  DNQLVVPSEG LYLIYSQVLF KGQGCPSTHV LLTHTISRIA VSYQTKVNLL SAIKSPCQRE
+  TPEGAEAKPW YEPIYLGGVF QLEKGDRLSA EINRPDYLDF AESGQVYFGI IAL
+    </PRE>
+    <P>then the representation of the selected residues are displayed like this:</P>
+    <PRE>
+               1         2         3         4
+      1234567890123456789012345678901234567890
+  000 ...........LA..AL.............L.L.L...L.
+  001 .A.A..L..LL...............L.L...LA.A....
+  002 .........A...A...A...L..L...A.ALLA....L.
+  003 ...L......L.L.....L...........LL.......A
+  004 ........LL.A............A.A........L....
+  005 .L.....L.A.......L..A..........AL
+    </PRE>
+    <P>If the 3-letter code is used, only ten residues per line are displayed.
+      Each selected residue is represented by its 3-letter code and non selected
+      residues are symbolised by three dots. The example above is displayed in
+      this way</P>
+    <PRE>
+       1   2   3   4   5   6   7   8   9   0
+  000 ... ... ... ... ... ... ... ... ... ... 
+  001 ... LEU ALA ... ... ALA LEU ... ... ... 
+  002 ... ... ... ... ... ... ... ... ... ... 
+  003 LEU ... LEU ... LEU ... ... ... LEU ... 
+  004 ... ALA ... ALA ... ... LEU ... ... LEU 
+  005 LEU ... ... ... ... ... ... ... ... ... 
+  006 ... ... ... ... ... ... LEU ... LEU ... 
+  007 ... ... LEU ALA ... ALA ... ... ... ... 
+  008 ... ... ... ... ... ... ... ... ... ALA 
+  009 ... ... ... ALA ... ... ... ALA ... ... 
+  010 ... LEU ... ... LEU ... ... ... ALA ... 
+  011 ALA LEU LEU ALA ... ... ... ... LEU ... 
+  012 ... ... ... LEU ... ... ... ... ... ... 
+  013 LEU ... LEU ... ... ... ... ... LEU ... 
+  014 ... ... ... ... ... ... ... ... ... ... 
+  015 LEU LEU ... ... ... ... ... ... ... ALA 
+  016 ... ... ... ... ... ... ... ... LEU LEU 
+  017 ... ALA ... ... ... ... ... ... ... ... 
+  018 ... ... ... ... ALA ... ALA ... ... ... 
+  019 ... ... ... ... ... LEU ... ... ... ... 
+  020 ... LEU ... ... ... ... ... LEU ... ALA 
+  021 ... ... ... ... ... ... ... LEU ... ... 
+  022 ALA ... ... ... ... ... ... ... ... ... 
+  023 ... ALA LEU 
+    </PRE>
+    <P>The other input data are displayed in the lines below:</P>
+    <UL>
+      <LI>Total appearance of the requested residues:</LI>
+      <LI>Start residue, End Residue</LI>
+      <LI>Embedment size</LI>
+      <LI>Minimum intensity</LI>
+      <LI>Min period, Max Period</LI>
+      <LI>The list of the 'Selected residues' with their corresponding weight</LI>
+    </UL>
+
+    <H3>4.2 Display of the results in a table</H3>
+    <P>The result of the computation is displayed in a eight columns table.</P>
+    <DL>
+      <DT><B>n</B></DT>
+      <DD>The order of the Fourier transform. this variable is equal to
+        the embedment size divided by the period.</DD>
+      <DT><B>a</B></DT>
+        <DD>Real part of the complex number representing the wave.</DD>
+      <DT><B>b</B></DT>
+        <DD>Imaginary part of the complex number representing the wave.</DD>
+      <DT><B>r</B></DT>
+        <DD>The norm of the complex number. It is equal to QR(a^2 + b^2).</DD>
+      <DT><B>theta</B></DT>
+        <DD>This is the angle formed by the vector that represents this complex
+          number in an x-y surface. The tangent of theta should be equal to b/a.
+        </DD>
+      <DT><B>origin</B></DT>
+        <DD>???</DD>
+      <DT><B>period</B></DT>
+        <DD>period shows how often a selected residue or group of residues is
+          repeated in the selected part of the sequence.</DD>
+      <DT><B>intensity</B></DT>
+        <DD>intensity is equal to a^2 + b^2. The probability of a random
+          calculation of a periodicity is equal to exp(-I) where I is the intensity
+          calculated for this periodicity.</DD>
+    </DL>
+
+    <H3>4.3 Display of the results with a graph</H3>
+    <P>The graphic representation of the result report on a graph the
+      periodicities on the X-axis and the Intensities on the Y-axis.
+      If the cutoff (or minimum intensity) is equal to zero, a continuous graph
+      is displayed, otherwise a bar graph is used.</P>
+    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+  </BODY>
+</HTML>

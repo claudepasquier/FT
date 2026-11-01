@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+  <HEAD>
+    <TITLE>SWISS-PROT Format</TITLE>
+  </HEAD>
+  <BODY BACKGROUND="bkg.gif">
+    <H2>SWISS-PROT Format</H2>
+    <HR>
+    <BR>
+    <P><B>SWISS-PROT</B> is a curated protein sequence database which strives
+      to provide a high level of annotations (such as the description of the
+      function of a protein, its domains structure, post-translational
+      modifications, variants, etc), a minimal level of redundancy and high
+      level of integration with other databases.</P>
+
+
+    <H4>Record format</H4>
+    <P>Each sequence  entry is  composed of  lines. Different  types of lines,
+      each with  their own  format, are used to record the various data which
+      make up  the entry.<P>
+    <P>Each line  begins with  a two-character  line code, which indicates the
+      type of  data contained  in the  line. The  current line types and line
+      codes and the order in which they appear in an entry, are shown below:</P>
+    <PRE>
+    ID     - Identification.
+    AC     - Accession number(s).
+    DT     - Date.
+    DE     - Description.
+    GN     - Gene name(s).
+    OS     - Organism species.
+    OG     - Organelle.
+    OC     - Organism classification.
+    RN     - Reference number.
+    RP     - Reference position.
+    RC     - Reference comments.
+    RX     - Reference cross-references.
+    RA     - Reference authors.
+    RL     - Reference location.
+    CC     - Comments or notes.
+    DR     - Database cross-references.
+    KW     - Keywords.
+    FT     - Feature table data.
+    SQ     - Sequence header.
+           - (blanks) sequence data.
+    //     - Termination line.
+    </PRE>
+    <P>The program ignores all the description lines and uses only these line
+      types: <B>'ID'</B>, <B>'DE'</B>, <B>'OS'</B>, <B>'SQ'</B> and
+      <B>'//'</B>.</P>
+    <UL>
+      <LI>The program uses the 'ENTRY_NAME' which is the first field of the ID
+        line as the first line of the title</LI>
+      <LI>The data of the <B>'DE'</B> and <B>'OS'</B> lines are collected by the
+        program and are used as the remaining lines of the title</LI>
+      <LI>The <B>'SQ'</B> line is used to identify the beginning of the sequence.
+        The program collect all the following lines until the teminalion line is
+        found or end is reached</LI>
+    </UL>
+    <H4>Useful links:</H4>
+    <P><A HREF="http://www.expasy.ch/sprot/sprot-top.html">More information
+      about <B>SWISS-PROT</B></A></P>
+    <P><A HREF="http://www.expasy.ch/txt/userman.txt">THE SWISS-PROT PROTEIN
+      SEQUENCE DATA BANK - USER MANUAL</A></P>
+    <BR>
+    <HR>
+    <H4><I>Example of <B>'ID'</B> lines:</I></H4>
+    <PRE>
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+ID   CYC_BOVIN      STANDARD;      PRT;   104 AA.
+ID   GIA2_GIALA     PRELIMINARY;   PRT;   296 AA.
+    </PRE>
+    <BR>
+    <H4><I>Example of <B>'DE'</B> lines:</I></H4>
+    <PRE>
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+DE   NADH DEHYDROGENASE (EC 1.6.99.3).
+
+DE   LYSOPINE DEHYDROGENASE (EC 1.5.1.16) (OCTOPINE SYNTHASE)
+DE   (LYSOPINE SYNTHASE) (FRAGMENT).
+    </PRE>
+    <BR>
+    <H4><I>Example of <B>'OS'</B> lines:</I></H4>
+    <PRE>
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+OS   ESCHERICHIA COLI.
+OS   HOMO SAPIENS (HUMAN).
+OS   ROUS SARCOMA VIRUS (STRAIN SCHMIDT-RUPPIN).
+OS   NAJA NAJA (INDIAN COBRA), AND NAJA NIVEA (CAPE COBRA).
+    </PRE>
+    <H4><I>Example of a sequence specification:</I></H4>
+    <PRE>
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+SQ   SEQUENCE   233 AA;  25644 MW;  666D7069 CRC32;
+     MSTESMIRDV ELAEEALPKK TGGPQGSRRC LFLSLFSFLI VAGATTLFCL LHFGVIGPQR
+     EEFPRDLSLI SPLAQAVRSS SRTPSDKPVA HVVANPQAEG QLQWLNRRAN ALLANGVELR
+     DNQLVVPSEG LYLIYSQVLF KGQGCPSTHV LLTHTISRIA VSYQTKVNLL SAIKSPCQRE
+     TPEGAEAKPW YEPIYLGGVF QLEKGDRLSA EINRPDYLDF AESGQVYFGI IAL
+//
+    </PRE>
+  </BODY>
+</HTML>

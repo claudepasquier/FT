@@ -1,0 +1,137 @@
+/* style.css — minimal clean styling for the FOURT SPA */
+:root {
+    --accent: #1a5fb4;
+    --bg: #fafafa;
+    --border: #ccc;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    margin: 0 auto;
+    max-width: 62rem;
+    padding: 1rem;
+    background: var(--bg);
+    color: #222;
+}
+
+header h1 {
+    margin: 0;
+    color: var(--accent);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    margin: 0.2rem 0;
+}
+
+.authors {
+    font-size: 0.85rem;
+    color: #555;
+}
+
+section {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+textarea {
+    width: 100%;
+    font-family: monospace;
+}
+
+fieldset {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 0.5rem 0;
+}
+
+#preset-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0;
+}
+
+#weights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+    gap: 0.3rem;
+}
+
+.weight input {
+    width: 4rem;
+}
+
+#btn-run,
+.preset {
+    background: var(--accent);
+    color: #fff;
+    border: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.preset {
+    background: #eef;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+#error-msg {
+    color: #c00;
+    font-weight: bold;
+}
+
+#appearance {
+    background: #f4f4f4;
+    padding: 0.5rem;
+    overflow-x: auto;
+}
+
+#peaks-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-variant-numeric: tabular-nums;
+}
+
+#peaks-table th,
+#peaks-table td {
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.5rem;
+    text-align: right;
+}
+
+#peaks-table th {
+    background: #eee;
+}
+
+canvas {
+    max-width: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    color: #666;
+}

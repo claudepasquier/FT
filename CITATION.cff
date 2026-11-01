@@ -1,0 +1,93 @@
+cff-version: 1.2.0
+message: >-
+  If you use FT, please cite the original method papers and this software
+  version.
+title: FT — Identification of Residue Periodicities in Sequences
+authors:
+  - family-names: Varvayannis
+    given-names: Nikolaos J.
+  - family-names: Pasquier
+    given-names: Claude
+  - family-names: Promponas
+    given-names: Vasilis I.
+  - family-names: Hamodrakas
+    given-names: Stavros J.
+version: 1.0.0
+date-released: '2026-10-31'
+license: GPL-3.0-or-later
+repository-code: 'https://src.koda.cnrs.fr/uoa-biol/FT'
+keywords:
+  - bioinformatics
+  - protein sequences
+  - Fourier transform
+  - periodicity analysis
+abstract: >-
+  Modern browser-based re-implementation of the FT tool for the
+  identification of residue periodicities in protein and nucleotide
+  sequences, using a WebAssembly port of the original C FFT pipeline.
+preferred-citation:
+  type: article
+  title: A web server to locate periodicities in a sequence
+  authors:
+    - family-names: Pasquier
+      given-names: Claude
+    - family-names: Promponas
+      given-names: Vasilis I.
+    - family-names: Varvayannis
+      given-names: Nikolaos J.
+    - family-names: Hamodrakas
+      given-names: Stavros J.
+  journal: Bioinformatics
+  volume: '14'
+  issue: '8'
+  pages: '749-750'
+  year: '1998'
+  month: '1'
+  doi: 10.1093/oxfordjournals.bioinformatics.a011054
+  url: https://doi.org/10.1093/oxfordjournals.bioinformatics.a011054
+  issn: 1367-4803
+references:
+  - type: article
+    title: A web server to locate periodicities in a sequence
+    authors:
+      - family-names: Pasquier
+        given-names: Claude
+      - family-names: Promponas
+        given-names: Vasilis I.
+      - family-names: Varvayannis
+        given-names: Nikolaos J.
+      - family-names: Hamodrakas
+        given-names: Stavros J.
+    journal: Bioinformatics
+    volume: '14'
+    issue: '8'
+    pages: '749-750'
+    year: '1998'
+    doi: 10.1093/oxfordjournals.bioinformatics.a011054
+    url: https://doi.org/10.1093/oxfordjournals.bioinformatics.a011054
+  - type: article
+    title: >-
+      Amino acid periodicities and their structural implications for the
+      evolutionarily conservative central domain of some silkmoth chorion
+      proteins
+    authors:
+      - family-names: Hamodrakas
+        given-names: Stavros J.
+      - family-names: Ekmetzoglou
+        given-names: T.
+      - family-names: Kafatos
+        given-names: F.C.
+    journal: Journal of Molecular Biology
+    volume: '186'
+    pages: '583-589'
+    year: '1985'
+  - type: article
+    title: >-
+      Analysis of periodic patterns in amino acid sequences: collagen
+    authors:
+      - family-names: McLachlan
+        given-names: A. D.
+    journal: Biopolymers
+    volume: '16'
+    pages: '1271-1297'
+    year: '1977'

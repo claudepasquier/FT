@@ -1,0 +1,65 @@
+# GitLab CI for FT modernization.
+# The front-end is build-free (plain ES modules); only the C core needs
+# building (native tests + Emscripten WASM).
+
+stages:
+  - build
+  - test
+  - pages
+  - mirror
+
+build-core-native:
+  stage: build
+  image: gcc:13
+  script:
+    - make -C core refcli test
+
+build-core-wasm:
+  stage: build
+  image: emscripten/emsdk:3.1.68
+  script:
+    - make -C core wasm
+  artifacts:
+    paths:
+      - web/src/wasm/
+
+pages:
+  stage: pages
+  image: alpine:3.19
+  needs:
+    - job: build-core-wasm
+      artifacts: true
+  script:
+    - mkdir -p public
+    - cp -r web/index.html web/src public/
+    - mkdir -p public/docs
+    - cp -r docs/* public/docs/
+    - cp README.md LICENSE CITATION.cff public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Automatic push mirror to GitHub (fallback if Koda's built-in
+# Repository-Mirroring UI is restricted).
+# Required CI/CD variables (Settings > CI/CD > Variables, masked):
+#   GITHUB_MIRROR_URL : git@github.com:<user>/<repo>.git
+#   GITHUB_MIRROR_KEY : private SSH deploy key with write access
+mirror-github:
+  stage: mirror
+  image: alpine:3.19
+  before_script:
+    - apk add --no-cache git openssh-client
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - echo "$GITHUB_MIRROR_KEY" > ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
+    - ssh-keyscan github.com >> ~/.ssh/known_hosts
+  script:
+    - git clone --mirror "$CI_REPOSITORY_URL" repo.git
+    - cd repo.git
+    - git remote add mirror "$GITHUB_MIRROR_URL"
+    - git push --mirror mirror
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG

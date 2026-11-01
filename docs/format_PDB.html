@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+  <HEAD>
+    <TITLE>PDB Format</TITLE>
+  </HEAD>
+  <BODY BACKGROUND="bkg.gif">
+    <H2>PDB Format</H2>
+    <HR>
+    <BR>
+    <P>The Protein Data Bank (PDB) is an archive of experimentally determined
+      three-dimensional structures of biological macromolecules, serving a
+      global community of researchers, educators, and students. The archives
+      contain atomic coordinates, bibliographic citations, primary and
+      secondary structure information, as well as crystallographic structure
+      factors and NMR experimental data.</P>
+    <H4>Record format</H4>
+    <P>Every PDB file may be broken into a number of lines terminated by an
+      end-of-line indicator. Each line in the PDB entry file consists of 80
+      columns. The last character in each PDB entry should be an end-of-line
+      indicator.</P>
+    <P>Each line in the PDB file is self-identifying. The first six columns of
+      every line contain a record name, left-justified and blank-filled. This
+      must be an exact match to one of the stated record names.</P>
+    <P>The program ignores all the description lines and uses only three types
+      of records: <B>'HEADER'</B>, <B>'TITLE'</B> and <B>'SEQRES'</B>.</P>
+    <UL>
+      <LI>The information following the <B>'HEADER'</B> and <B>'TITLE'</B>
+        identifiers are collected and used as the title of the sequence.<LI>
+      <LI>The <B>'SEQRES'</B> records are used to identify the sequence.
+        <P>After the record name in columns 1 to 6, the program uses the chain
+          identifier displayed in column 12 to select the appropriate chain
+          of residues (a PDB file can contain more than one chains). If this
+          chain identifier is the one which is selected by the uses, the
+          program collect all the residues (displayed with their
+          <A HREF="AA_codes.html">3-letter code</A>) in the line from column 20
+          to column 70.</P>
+      </LI>
+    </UL>
+    <P><A HREF="http://pdb.pdb.bnl.gov/">More information about the
+      Protein Data Bank</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      (<A HREF="http://www.embl-heidelberg.de/pdb/">mirror site at EMBL</A>)</P>
+    <P><A HREF="http://pdb.pdb.bnl.gov/Format.doc/Contents_Guide_21.html">
+      Protein Data Bank Contents Guide</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      (<A HREF="http://www.embl-heidelberg.de/pdb/Format.doc/Contents_Guide_2.html">mirror site at EMBL</A>)</A></P>
+    <BR>
+    <HR>
+    <H4><I>Example of <B>'HEADER'</B> record:</I></H4>
+    <PRE>
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+HEADER    MUSCLE PROTEIN                          02-JUN-93   1MYS
+
+HEADER    HYDROLASE (CARBOXYLIC ESTER)            08-APR-93   2PHI
+
+HEADER    COMPLEX (LECTIN/TRANSFERRIN)            07-JAN-94   1LGB
+    </PRE>
+    <BR>
+    <H4><I>Example of <B>'TITLE'</B> record:</I></H4>
+    <PRE>
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+TITLE     RHIZOPUSPEPSIN COMPLEXED WITH REDUCED PEPTIDE INHIBITOR
+
+TITLE     BETA-GLUCOSYLTRANSFERASE, ALPHA CARBON COORDINATES ONLY
+    </PRE>
+    <BR>
+    <H4><I>Example of <B>'SEQRES'</B> record:</I></H4>
+    <PRE>
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+SEQRES   1 A   21  GLY ILE VAL GLU GLN CYS CYS THR SER ILE CYS SER LEU
+SEQRES   2 A   21  TYR GLN LEU GLU ASN TYR CYS ASN                    
+SEQRES   1 B   30  PHE VAL ASN GLN HIS LEU CYS GLY SER HIS LEU VAL GLU
+SEQRES   2 B   30  ALA LEU TYR LEU VAL CYS GLY GLU ARG GLY PHE PHE TYR
+SEQRES   3 B   30  THR PRO LYS ALA                                    
+SEQRES   1 C   21  GLY ILE VAL GLU GLN CYS CYS THR SER ILE CYS SER LEU
+SEQRES   2 C   21  TYR GLN LEU GLU ASN TYR CYS ASN                    
+SEQRES   1 D   30  PHE VAL ASN GLN HIS LEU CYS GLY SER HIS LEU VAL GLU
+SEQRES   2 D   30  ALA LEU TYR LEU VAL CYS GLY GLU ARG GLY PHE PHE TYR
+SEQRES   3 D   30  THR PRO LYS ALA                                    
+    </PRE>
+  </BODY>
+</HTML>

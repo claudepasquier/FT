@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+  <HEAD>
+    <TITLE>Description of the Input</TITLE>
+  </HEAD>
+  <BODY BACKGROUND="bkg.gif">
+    <TABLE WIDTH='100%'>
+      <TR>
+        <TD ALIGN = 'LEFT'>
+          <I><BR>Identification of Residue Periodicities in Sequences</I>
+        </TD>
+        <TD ALIGN='RIGHT'>
+          <I>Varvayannis, N.J., Pasquier, C.M.,<BR>Promponas, V.I. and Hamodrakas S.J.</I>
+        </TD>
+      </TR>
+    </TABLE>
+    <HR>
+    <TABLE BORDER=0>
+      <TR>
+        <TD><A HREF="doc_index.html"><IMG BORDER=0 SRC="bt_cont.gif"></TD>
+        <TD>Index</TD><TD WIDTH=15></TD>
+        <TD><A HREF="doc_copyright.html"><IMG BORDER=0 SRC="bt_left.gif"></TD>
+        <TD>2.Copyright notice</TD><TD WIDTH=15></TD>
+        <TD><A HREF="doc_output.html"><IMG BORDER=0 SRC="bt_right.gif"></TD>
+        <TD>4. Description of the Output</TD>
+      </TR>
+    </TABLE>
+    <HR>
+
+    <H2>3. Description of the Input</H3>
+    <P>The input form, which allows user to specifie informations and data needed
+      by the program, is divided in six panels (cf. fig 1.):</P>
+    <UL>
+      <LI>all data concerning the sequence to be analysed (the sequence itself,
+        the format used, the selection of a part ot the sequence) are specified
+        in the <B><A HREF='#seqSpec'>Sequence specification</A></B> panel,</LI>
+      <LI>the selection of residues we want to analyse the periodicity is done
+        in the<B><A HREF='#selectRes'>Selection of Residues</A></B> panel,</LI>
+      <LI>informations about the way the results are displayed are specified in
+        the <B><A HREF='#outputFormat'>Output Formatting</A></B> panel,</LI>
+      <LI>command buttons are grouped in the <B><A HREF='#commands'>Command</A></B> panel,</LI>
+      <LI>the <B><A HREF='#statistics'>Statistics</A></B> area is used by the program to display statistics
+        about the presence of the residues in the sequence</LI>
+      <LI>errors relative to the data entered on the form are displayed in the
+        <B><A HREF='#errors'>Errors</A></B> panel,</LI>
+    </UL>
+    <BR>
+
+    <CENTER>
+    <TABLE BORDER=1 CELLPADDING=10>
+      <TR>
+        <TD COLSPAN=2 ALIGN=CENTER>Sequence Specification</TD>
+      </TR>
+      <TR>
+        <TD COLSPAN=2 ALIGN=CENTER>Statistics</TD>
+      </TR>
+      <TR>
+        <TD ROWSPAN=2 ALIGN=CENTER>Selection of Residues</TD>
+        <TD ALIGN=CENTER>Output Formatting</TD>
+      </TR>
+      <TR><TD ALIGN=CENTER>Command</TD></TR>
+      <TR>
+        <TD COLSPAN=2 ALIGN=CENTER>Errors</TD>
+      </TR>
+    </TABLE>
+    <P>fig. 1: Layout of the input form</P>
+    </CENTER>
+
+    <H3><A NAME="seqSpec">3.1 Sequence Specification</A></H3>
+    <P>A sequence can be either directly typed in the text area or
+      <A HREF="hint_paste.html">pasted from a text editor.</A></P>
+    <P>The sequence can be specified in <A HREF="format_FASTA.html">FASTA</A>,
+      <A HREF="format_SwissProt.html">SwissProt</A> or <A HREF="format_PDB.html">
+      PDB format</A>. The user must select the format used by checking the
+      appropriate box in the format frame</P>
+    <P>As the PDB format can possibly contains more than one chain of residues, it
+      is necessary to indicate which chain we want to analyse. This is done by
+      entering the name of the selected string (in the same format as in the PDB
+      sequence) in the <B>ChainID</B> area. If the PDB sequence contains only one
+      chain, then it's identifier should be a space and we can leave this parameter
+      blank. If no ChainID is specified and the PDB sequence contains more than
+      one chain, then the first chain found is used.</P>
+    <P>For convenience, it is also possible to enter a sequence as plain text
+      by using the <A HREF="AA_codes.html">1-letter code</A> of residues.</P>
+      Capital letters must be used for proteins and lowercase letters for DNA
+      sequences. The <B>'X'</B> letter is used for unknown or not important
+      residues. Spaces or other characters are allowed since they do not affect
+      the results of the program. The <B>maximum length</B> of a sequence is
+      4096 residues.</P>
+    <P>By default, the whole sequence is analysed but it is possible to select
+      only a part of the sequence by changing the two parameters below:</P>
+    <DL>
+      <DT><B>Start residue</B></DT>
+      <DD>This integer number indicate the position in the sequence of the first
+        residue to be selected</DD>
+
+      <DT><B>End residue</B></DT> 
+      <DD>This integer number indicate the position in the sequence of the last
+        residue to be selected. The special value '#' for the end residue
+        indicate that we want to select the sequence from the index specified
+        for start residue to the end.<BR>
+        These two indexes are inclusive, then the length of the selected sequence
+        is equal to (End residue - Start residue + 1).
+      </DD>
+
+      <DT><B>embedment size</B></DT>
+      <DD>The sequence is 'embedded' in an array of 0's for computational
+        purposes. The size of this array must be a <B>power of 2</B> and obviously
+        it must be greater than the length of the selected part of the sequence.
+        The size of this array affects the resolution of the results: a bigger
+        array size gives a better resolution but, of course, it affects the speed
+        of the computation.  This number should not be greater than 4096.<BR>
+        The special character '#' means that the program must automatically
+        choose the  smallest power of 2 that is greater than the length of the
+        selected sequence</DD>
+
+      <DT><B>Ignore gaps</B></DT>
+      <DD>By default, gaps are represented by the character '-' in sequences
+        expressed with the 1-letter codes of residues. Gaps are considered as
+        unknown residues by the program. The 'Ignore gaps' option can be checked
+        to force the program to ignore gaps ant to handle them as space characters.
+      </DD>
+
+      <DT><B>Accept Unknown</B></DT>
+      <DD>By default, unknow residues are specified with the letter 'X'. But, in some
+        databases, some other letters are used to indicate an unknown residue.
+        The <B>Accept Unk.</B> checkbox should be used in such cases to indicate that
+        each unknow letters found in the sequence must be considered as an 'X'.</DD>
+    </DL>
+
+    <H3><A NAME="selectRes">3.2 Selection of Residues</A></H3>
+    <P>This panel display the name of all residues followed by a text area which
+      represents the weight of the corresponding residue. The weight are used to
+      create the pulse which will analysed by the program. For example, by selecting
+      the weight 1 for 'A' and 2 for 'L', the sequence <B>MISLIAALAVD</B> will be
+      transformed in the array
+      <B>{0&nbsp;0&nbsp;0&nbsp;2&nbsp;0&nbsp;1&nbsp;1&nbsp;2&nbsp;1&nbsp;0&nbsp;0}</B>
+      by the program.</P>
+      <P>The weight of the residue could represent a special property of the residue
+     (the charge for example) and can have a non-integer value.
+     If a residue that does not appear in the sequence is weighted the results will
+     not be affected.</P>
+
+    <H3><A NAME="outputFormat">3.3 Output Formatting</H3>
+    <P>The preferencies concerning the output of the result can be specified in
+      this panel.
+    <DL>
+      <DT><B>Cutoff</B></DT>
+      <DD>The cutoff represents the minimum intensity to be displayed.
+        The probability of finding by chance a periodicity with intensity I
+        is equal to exp(-I).
+      </DD>
+      <DT><B>Minimum period</B></DT>
+      <DD>This parameter represents the minimim value of the periodicities presented
+        in the result. All periodicities lower that this limit are not displayed.
+        The minimum period must be greater than '1'.
+      </DD>
+      <DT><B>Maximum period</B></DT>
+      <DD>This parameter represents the maximum value of the periodicities presented
+        in the result. All periodicities greater that this limit are not displayed.
+        The maximum period must not exceed the length of the selected part of the
+        sequence. The special character '#' means that the program must use as
+        maximum period, the half of the selected sequence length.
+      </DD>
+      <DT><B>Stats in %</B></DT>
+      <DD>By default, the panel 'Statistics' display the count of each residue
+        in the sequence. Statistics can be displayed in percentage by checking this
+        option.</DD>
+      <DT><B>3-letter</B></DT>
+      <DD>By default, amino acids are represented with their 1-letter code. By
+        checking one can force the program to display amino acids with their 3-letter
+        code (<A HREF='AA_codes.html'>correspondance table between 1-letter and
+        3-letter code</A>).
+      <DT><B>HTML page / plain text</B></DT>
+      <DD>These checkboxes allows the user to choose how the results should be
+        displayed. Choose 'plain text' if you want to copy and paste the results
+        in a text editor or if you want to save it without all the HTML stuff.
+        One should note that the graphical representation is not inserted in the
+        plain text mode
+      </DD>
+    </DL>
+
+    <H3><A NAME="commands">3.4 Commands</H3>
+    <P>This panel contains three buttons:</P>
+    <DL>
+      <DT><B>Submit</B></DT>
+      <DD>Check the data on the form, call the program and display the results. 
+        If errors are detected in the form the data are not processed and
+        comprehensive error messages are displayed in the frame panel.
+      </DD>
+      <DT><B>Check</B></DT>
+      <DD>Check the data on the form but doesn't call the program. This button
+        generate the display of the statistics, the length of the sequence and
+        the minimum embedment size on the form.
+      </DD>
+      <DT><B>Reset</B></DT>
+      <DD>Clear the form and redisplay default value for all the input fields</DD>
+    </DL>
+
+    <H3><A NAME="statistics">3.5 Statistics</H3>
+    <P>This panel shows the appearance of each residue in the whole sequence.
+      Statistics are updated each time the user clicks on the 'check' button.
+      More frequent residues appears first. The user can choose, with the checkboxes
+      in the 'output formatting' panel to represent the amino acids by their
+      1-letter or the 3-letter code and to display the statistics by value or by
+      percentage</P>
+
+    <H3><A NAME="errors">3.6 Errors</H3>
+    <P>Error messages are displayed in this panel after the user clicks on the
+     'submit' or 'check' buttons.</P>
+    <P>Explanation of the error messages:</P>
+    <DL>
+      <DT><B>E01: The character [char] is not allowed in the sequence.</B></DT>
+      <DD>The character specified cannot be used in a sequence. Allowed characters
+        are the twenty amino acid letters, the four DNA letters the 'X'
+        letter (to indicate an unknown residue), the gap symbol '-', the space
+        character, the carriage return and the tabulation.
+        If the option 'Accept unknown' is selected, then all the other letters
+        (lowercase and uppercase) are accepted and converted to an 'X'.
+      </DD>
+      <DT><B>E02: 'Start residue' must be an integer.</B><BR>
+        <B>E11: 'Start residue' cannot be less than '1'.</B>
+      </DT>
+      <DD>'Start residue' allows to select only a part of the specified sequence.
+        It is the index of the beginning of this sub-sequence and only Integer
+        values are possible.
+      </DD>
+      <DT><B>E03: 'End residue' must be an integer or '#'.</B><BR>
+        <B>E12: 'End residue' cannot be greater than the length of the sequence.</B><BR>
+        <B>E13: 'End residue' must be greater than 'Start residue'.</B>
+      </DT>
+      <DD>Like 'Start residue', 'End residue' allows to select only a part of
+        the specified sequence.
+        It is the index of the end of this sub-sequence and only Integer
+        values are possible.
+        But, unlike 'Start residue', a special character can be specified to
+        replace the last index of the sequence. '*' means that all residues
+        between the index of 'Start residue' to the end of the sequence
+        must be used for the calculation. An error is reported if 'End residue'
+        is less or equal to 'Start residue'.
+      </DD>
+      <DT><B>E04: 'Embedment size' must be an integer or '#'.</B><BR>
+        <B>E16: 'Embedment size' must be a power of 2.</B><BR>
+        <B>E14: 'Embedment size' cannot be less than the length of the selected part of the sequence.</B><BR>
+        <B>E15: the maximum value for the 'Embedment size' is 4096.</B>
+      </DT>
+      <DD>As specified in the documentation, 'Embedment size' indicate the 
+        size of the array where the sequence is 'embedded'. This value must
+        be an integer, a power of 2 and must be greater than the length of the sequence.
+        The special character '#' is also allowed. It indicate that the program
+        must choose the smallest power of 2 that is greater than the length of the selected sequence.
+        The maximum value for this parameter is 4096.
+      </DD>
+      <DT><B>E05: 'Cutoff' must be a float.</B></DT>
+      <DD>The cutoff represents the minimum intensity to be displayed.
+        It must be a float value.
+      </DD>
+      <DT><B>E06: 'Minimum period' must be a float.</B><BR>
+        <B>E17: 'Minimum period' must be greater than '1'.</B>
+      </DT>
+      <DD>This parameter represents the minimim value of the periodicities
+        presented in the result. It must be an integer greater that 1.
+      </DD>
+      <DT><B>E07: 'Maximum period' must be a float or '#'.</B><BR>
+        <B>E18: the 'Maximum period' cannot be greater than the length of the selected part of the sequence.</B><BR>
+        <B>E19: the 'Maximum period' must be greater than the 'Minimum period'.</B>
+      </DT>
+      <DD>This parameter represents the maximum value of the periodicities
+        presented in the result. It must be an integer less that then length of
+        the selected part of the sequence and greater than the minimum period.
+        The special character '#' is also allowed. It indicate that the program
+        must use as maximum period the half of the sequence length.
+      </DD>
+      <DT><B>E08: the weight specified for the '[char] residue' must be a float.</B></DT>
+      <DD>The weights are used to create the pulse which will analysed by the
+        All the specified weight must be a float.
+      <DD>
+      <DT><B>E09: the length of the sequence must not exceed 4096 characters.</B></DT>
+      <DD>The maximum size of the array where the sequence in embedded is fixed
+        at 4096. A sequence with more than 4096 residue cannot be processed by
+        the program.
+      <DD>
+      <DT><B>E10: a sequence must be specified.</B></DT>
+      <DD>This message indicate that the program fails to handle the sequence.
+        Check if the sequence in the text area is compatible with the format
+        specified.
+      <DD>
+    </DL>
+    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+  </BODY>
+</HTML>

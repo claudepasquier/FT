@@ -1,0 +1,32 @@
+{
+    "title": "FT — Identification of Residue Periodicities in Sequences",
+    "creators": [
+        {
+            "name": "Pasquier, Claude"
+        },
+        {
+            "name": "Promponas, Vasilis J."
+        },
+        {
+            "name": "Varvayannis, Nikolaos J."
+        },
+        {
+            "name": "Hamodrakas, Stavros J."
+        }
+    ],
+    "description": "Modern browser-based re-implementation of the FT tool for the identification of residue periodicities in protein and nucleotide sequences, using a WebAssembly port of the original C FFT pipeline. Original method: Pasquier et al., Study of residue periodicities in sequences.",
+    "license": "GPL-3.0-or-later",
+    "keywords": [
+        "bioinformatics",
+        "protein sequences",
+        "Fourier transform",
+        "periodicity analysis"
+    ],
+    "related_identifiers": [
+        {
+            "identifier": "10.1093/oxfordjournals.bioinformatics.a011054",
+            "relation": "isSupplementTo",
+            "scheme": "doi"
+        }
+    ]
+}

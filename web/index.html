@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FT — Identification of Residue Periodicities in Sequences</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>FT</h1>
+        <p class="subtitle">Study of Residue Periodicities in Sequences</p>
+        <p class="authors">Pasquier C.M., Promponas V.I., Varvayannis N.J., Hamodrakas S.J.
+            — modernised WebAssembly edition; all computation runs in your browser.</p>
+    </header>
+
+    <main>
+        <section id="input-panel">
+            <h2>Sequence specification</h2>
+            <label>Sequence length: <span id="seq-length">0</span></label>
+            <textarea id="seq-input" rows="8" spellcheck="false"
+                placeholder="Paste a sequence in FASTA, SwissProt or PDB format, or plain residues"></textarea>
+
+            <fieldset>
+                <legend>Format</legend>
+                <label><input type="radio" name="format" value="none" checked> Plain</label>
+                <label><input type="radio" name="format" value="fasta"> FASTA</label>
+                <label><input type="radio" name="format" value="swissprot"> SwissProt</label>
+                <label><input type="radio" name="format" value="pdb"> PDB</label>
+            </fieldset>
+
+            <div class="row">
+                <label>Start residue <input type="number" id="start-res" min="1" value="1"></label>
+                <label>End residue <input type="number" id="end-res" min="1" value="0"></label>
+                <label>Embedment size (power of 2)
+                    <select id="power2"></select></label>
+            </div>
+            <div class="row">
+                <label>Min period <input type="number" id="min-period" value="2" min="2"></label>
+                <label>Max period <input type="number" id="max-period" value="20"></label>
+                <label>Min intensity <input type="number" id="min-intensity" value="0" step="0.1"></label>
+            </div>
+            <label class="check"><input type="checkbox" id="use-3letter"> Display residues with 3-letter code</label>
+        </section>
+
+        <section id="problems-panel">
+            <h2>Residue selection</h2>
+            <p>Choose a preset group or define your own residues and weights:</p>
+            <div id="preset-buttons"></div>
+            <div id="weights-grid"></div>
+            <button id="btn-run">Compute periodicities</button>
+            <p id="error-msg" role="alert" hidden></p>
+        </section>
+
+        <section id="results-panel" hidden>
+            <h2>Results</h2>
+            <p id="summary"></p>
+            <h3>Appearance of the selected residues</h3>
+            <pre id="appearance"></pre>
+            <h3>Fourier peaks</h3>
+            <table id="peaks-table">
+                <thead>
+                    <tr>
+                        <th>n</th>
+                        <th>a</th>
+                        <th>b</th>
+                        <th>r</th>
+                        <th>θ</th>
+                        <th>origin</th>
+                        <th>period</th>
+                        <th>intensity</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="btn-csv">Download CSV</button>
+            <h3>Graphical representation</h3>
+            <canvas id="chart" width="900" height="420"></canvas>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <a href="docs/index.html">Documentation</a> ·
+            <a href="docs/method.html">Method</a> ·
+            <a href="docs/references.html">References</a>
+        </nav>
+    </footer>
+
+    <script type="module" src="src/app.js"></script>
+</body>
+
+</html>

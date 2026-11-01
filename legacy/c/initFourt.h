@@ -1,0 +1,1 @@
+void randomName( char*, int );
