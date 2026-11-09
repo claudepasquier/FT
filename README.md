@@ -1,7 +1,8 @@
 # FT — Identification of Residue Periodicities in Sequences
 
 [![DOI](https://zenodo.org/badge/1442042344.svg)](https://doi.org/10.5281/zenodo.23878676)
-[![CI pipeline](https://src.koda.cnrs.fr/claudepasquier/FT/badges/main/pipeline.svg?v=2)](https://src.koda.cnrs.fr/claudepasquier/FT/-/pipelines)
+[![CI pipeline (Koda)](https://src.koda.cnrs.fr/uoa-biol/FT/badges/main/pipeline.svg?v=2)](https://src.koda.cnrs.fr/uoa-biol/FT/-/pipelines)
+[![Deploy (GitHub Actions)](https://github.com/claudepasquier/FT/actions/workflows/deploy.yml/badge.svg)](https://github.com/claudepasquier/FT/actions/workflows/deploy.yml)
 [![Pages deployment](https://img.shields.io/website?url=https%3A%2F%2Fclaudepasquier.github.io%2FFT%2F&label=online%20app)](https://claudepasquier.github.io/FT/)
 
 **▶ Run the app online: <https://claudepasquier.github.io/FT/>**
