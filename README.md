@@ -2,6 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/1442042344.svg)](https://doi.org/10.5281/zenodo.23878676)
 [![CI pipeline (Koda)](https://src.koda.cnrs.fr/uoa-biol/FT/badges/main/pipeline.svg?v=2)](https://src.koda.cnrs.fr/uoa-biol/FT/-/pipelines)
+[![CI (GitHub Actions)](https://github.com/claudepasquier/FT/actions/workflows/ci.yml/badge.svg)](https://github.com/claudepasquier/FT/actions/workflows/ci.yml)
 [![Deploy (GitHub Actions)](https://github.com/claudepasquier/FT/actions/workflows/deploy.yml/badge.svg)](https://github.com/claudepasquier/FT/actions/workflows/deploy.yml)
 [![Pages deployment](https://img.shields.io/website?url=https%3A%2F%2Fclaudepasquier.github.io%2FFT%2F&label=online%20app)](https://claudepasquier.github.io/FT/)
 
@@ -16,13 +17,17 @@ structural/functional features of DNA.
 
 ## History
 
-The original FT was a late-1990s web service developed at the **Division of
-Cell Biology and Biophysics, Department of Biology, University of Athens**.
-The code was written mainly by **Claude Pasquier**, with contributions from
-**Nikos Varvayannis** and **Vasilis Promponas**; **Stavros Hamodrakas** is the
-author of the original 1985 Fortran program on which it is based. It was built on a
-C conversion (by A.D. McLachlan's algorithm) of a 1985 Fortran program
-(Hamodrakas et al., 1985), with a Java-applet front-end and C CGI back-end.
+- **[original: 1998]** The original FT was a late-1990s web service developed
+  at the **Division of Cell Biology and Biophysics, Department of Biology,
+  University of Athens, Panepistimiopolis, Athens 15701, Greece**.
+  The code was written mainly by **Claude Pasquier**, with contributions from
+  **Nikos Varvayannis** and **Vasilis Promponas**; **Stavros Hamodrakas** is the
+  author of the original 1985 Fortran program on which it is based. It was built on a
+  C conversion (by A.D. McLachlan's algorithm) of a 1985 Fortran program
+  (Hamodrakas et al., 1985), with a Java-applet front-end and C CGI back-end.
+- **[modernised: 2026]** The modernised edition (WebAssembly port, this
+  repository) was produced at **Université Côte d'Azur, CNRS, I3S
+  (Sophia Antipolis), France** by **Claude Pasquier**.
 
 This repository is the **modernised edition** (CNRS):
 
@@ -96,6 +101,13 @@ GitLab):
 - Primary: CNRS Koda GitLab + GitLab Pages (see `.gitlab-ci.yml`).
 - Mirror: GitHub (push mirror) for visibility, Zenodo DOI minting and
   Software Heritage archiving.
+
+## Historical access
+
+The original 1998 service was hosted at the University of Athens:
+
+- Legacy version accessible (but no longer executable):
+  `http://athina.biol.uoa.gr/FT/`
 
 ## Documentation
 
